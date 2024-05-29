@@ -22,7 +22,7 @@ namespace PlaywrightTests
         public async Task Setup()
         {
             playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false, SlowMo = 100 });
+            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true, SlowMo = 100 });
             page = await browser.NewPageAsync();
 
             mainPage = new MainPage(page);

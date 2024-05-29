@@ -21,7 +21,7 @@ public class CCBT_ReserveARoom
     public async Task Setup()
     {
         playwright = await Playwright.CreateAsync();
-        browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+        browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
         page = await browser.NewPageAsync();
 
         calendarTable = new CalendarTablePage(page);
