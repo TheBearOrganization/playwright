@@ -22,7 +22,7 @@ namespace PlaywrightTests
         public async Task Setup()
         {
             playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false, SlowMo = 100 });
             page = await browser.NewPageAsync();
 
             mainPage = new MainPage(page);
@@ -64,7 +64,7 @@ namespace PlaywrightTests
             await adminPage.AddRoom(_roomNumber, "Double", "100", "A cozy double room with all amenities.");
 
             // Wait for the room to be added
-            await page.WaitForSelectorAsync("id=roomName101");
+            await page.WaitForSelectorAsync($"id=roomName{_roomNumber}");
 
             // Edit the room's description and image
             await adminPage.EditRoom(_roomNumber, "An updated description for the double room.", "https://i.postimg.cc/bY5pFcLg/Screenshot-2024-05-21-202848.jpg");

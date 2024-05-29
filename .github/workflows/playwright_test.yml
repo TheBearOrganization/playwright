@@ -19,7 +19,7 @@ jobs:
       run: dotnet tool install --global PowerShell
     
     - name: Ensure Browsers Are Installed
-      run: pwsh D:\a\adrian-stefanescu\adrian-stefanescu\PlaywrightTests\bin\Debug\net8.0\playwright.ps1 install --with-deps chromium
+      run: pwsh .\PlaywrightTests\bin\Debug\net8.0\playwright.ps1 install --with-deps chromium 
     
     - name: Run your tests
       run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" --results-directory "reports"

@@ -40,7 +40,7 @@ public class CCBT_ReserveARoom
     [Test]
     public async Task ReserveARoom()
     {
-         
+         await page.GotoAsync("https://automationintesting.online");
 
         await mainPage.LetMeHack().ClickAsync();
         await mainPage.BookNow().ClickAsync();

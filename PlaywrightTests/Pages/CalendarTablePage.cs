@@ -25,7 +25,7 @@ namespace PlaywrightTests.Pages
         public ILocator Next() => page.GetByRole(AriaRole.Button, new() { Name = "Next", Exact = true });
         public ILocator CalendarCell(int row, int col = 2) => page.Locator($"div:nth-child({row}) > .rbc-row-bg > div:nth-child({col})");
         public ILocator CalendarDate(int row, int col = 2) => page.Locator($"div:nth-child({row}) > .rbc-row-content > .rbc-row > div.rbc-date-cell:nth-child({col})");
-        public Task<int> UnavailableSegment(int row, int col = 2) => page.GetByText($"div:nth-child({row}) *[title^=\"Unavailable\"]").CountAsync();
+        public Task<int> UnavailableSegment(int row, int col = 0) => page.Locator($"div.rbc-month-row:nth-child({row}) *[title^='Unavailable']").CountAsync();
         public ILocator EventSegment(string content) => page.Locator($"div:text-is(\"{content}\")");
         #endregion
 
