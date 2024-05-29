@@ -1,0 +1,40 @@
+name: Playwright Tests
+on:
+    workflow_dispatch:
+
+jobs:
+  playwright:
+    timeout-minutes: 60
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Dotnet
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - run: dotnet build .\UiTestingSolution.sln
+    
+    - name: Install Powershell
+      run: dotnet tool install --global PowerShell
+    
+    - name: Ensure Browsers Are Installed
+      run: pwsh D:\a\adrian-stefanescu\adrian-stefanescu\PlaywrightTests\bin\Debug\net8.0\playwright.ps1 install --with-deps chromium
+    
+    - name: Run your tests
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx" --results-directory "reports"
+
+    - name: Upload Results
+      if: ${{ success() || failure() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results.trx
+        path: reports
+    
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: ${{ success() || failure() }}
+      with:
+        name: Test Results                # Name of the check run which will be created
+        path: reports/test-results.trx    # Path to test results
+        reporter: dotnet-trx              # Format of test results

@@ -1,0 +1,6 @@
+{
+    "playwright.env": {
+        //"DEBUG": "pw:api"
+    },
+    "editor.detectIndentation": false
+}
