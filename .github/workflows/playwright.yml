@@ -1,15 +1,11 @@
 name: Playwright Tests - Docker Container
 
 on:
-  push:
-    branches: [ main, UiTestingTask ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   playwright:
-    name: 'Playwright Tests'
+    name: 'Playwright Docker'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright/dotnet:v1.43.0-jammy
