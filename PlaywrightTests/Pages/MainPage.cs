@@ -9,7 +9,7 @@ namespace PlaywrightTests.Pages;
 public interface IMainPage
 {
     public ILocator LetMeHack();
-    public ILocator BookNow();
+    public ILocator BookRoomByIndex(int roomIndex);
 }
 
 public class MainPage : IMainPage
@@ -22,6 +22,6 @@ public class MainPage : IMainPage
 
     #region locators
     public ILocator LetMeHack() => page.GetByRole(AriaRole.Button, new() { Name = "Let me hack!" });
-    public ILocator BookNow() => page.GetByRole(AriaRole.Button, new() { Name = "Book this room" }).First;
+    public ILocator BookRoomByIndex(int roomIndex=1) => page.Locator($"(//div[contains(@class,'hotel-room-info')]//p[contains(text(),'my_test_room')]//../button[@type='button'])[{roomIndex}]");
     #endregion
 }

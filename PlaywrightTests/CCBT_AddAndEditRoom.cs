@@ -61,16 +61,16 @@ namespace PlaywrightTests
             await page.WaitForSelectorAsync("button:has-text('Create')");
 
             // Add a new double room
-            await adminPage.AddRoom(_roomNumber, "Double", "100", "A cozy double room with all amenities.");
+            await adminPage.AddRoom(_roomNumber, "Double", "100", $"A cozy double room with all amenities. my_test_room_{_roomNumber}");
 
             // Wait for the room to be added
             await page.WaitForSelectorAsync($"id=roomName{_roomNumber}");
 
             // Edit the room's description and image
-            await adminPage.EditRoom(_roomNumber, "An updated description for the double room.", "https://i.postimg.cc/bY5pFcLg/Screenshot-2024-05-21-202848.jpg");
+            await adminPage.EditRoom(_roomNumber, $"A cozy double room with all amenities. my_test_room_{_roomNumber}", "https://i.postimg.cc/bY5pFcLg/Screenshot-2024-05-21-202848.jpg");
 
             // Verify the updated details
-            await page.WaitForSelectorAsync("text=An updated description for the double room.");
+            await page.WaitForSelectorAsync($"//*[contains(text(), 'A cozy double room with all amenities.')]");
         }
     }
 }

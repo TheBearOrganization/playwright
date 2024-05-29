@@ -40,10 +40,11 @@ public class CCBT_ReserveARoom
     [Test]
     public async Task ReserveARoom()
     {
-         await page.GotoAsync("https://automationintesting.online");
+        await page.GotoAsync("https://automationintesting.online");
+
 
         await mainPage.LetMeHack().ClickAsync();
-        await mainPage.BookNow().ClickAsync();
+        await mainPage.BookRoomByIndex(1).ClickAsync();
 
         await calendarTable.SelectDates("Monday", numberOfNights: 3);
 
